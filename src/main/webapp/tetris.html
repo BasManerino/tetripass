@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TetrIPASS</title>
+        <meta charset="UTF-8">
+
+        <style>
+
+            a {
+                color: #000;
+                text-decoration: none;
+                font-family:Arial;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            html{
+                overflow:hidden;
+            }
+
+            body {
+                background: #def;
+            }
+            
+            #canvas {
+                border: 10px solid #78a;
+                background: #becfea;
+    			margin-left: auto;
+    			margin-right: auto;
+    			display: block;
+    			z-index: 0;
+    			width: 18%;
+            }
+
+            #highscore {
+                background: #78a;
+                position: relative;
+                z-index:100;
+                
+                font-family: arial;
+                font-size: 30px;
+                color: #fff;
+
+                width: 20%;
+                bottom: 500px;
+                text-align: center;
+    			margin-left: auto;
+    			margin-right: auto;
+                display:none;
+            }
+
+            h1 {
+				font-family: impact;
+            }
+            
+            h2 {
+                font-family: arial;
+                z-index: 200;
+            }
+
+            #stat {
+                font-family: arial;
+                font-weight: bold;
+                font-size: 35px;
+                margin-left: 400px;
+            }
+
+            #home {
+                display:none;
+                color: #c33;
+            }
+            
+            #slinks a {
+                color: #c00;
+            }
+
+        </style>
+    </head>
+    <body>
+		
+    	<h1 align="center">TetrIPASS</h1>
+    
+        <canvas id="canvas"></canvas>
+
+        <div id="highscore" style="width:40%;">
+        
+       		
+			<div>Game over</div>
+			
+			<br>
+
+            <div id='eindScore'></div>
+            
+            <br>
+
+			<div id="scoreAdd">
+				<h3>Wilt u uw score toevoegen aan de rankings?</h3>
+				<input type="button" style="width:100px;" value="ja" id="ja" onClick="sessionStorage.removeItem(diff)">
+            	<input type="button" value="nee" style="width:100px;" id="nee" onClick="sessionStorage.removeItem(diff)">
+            </div>
+			<div id="noScoreAdd">
+            	<a href="index.html"><button style="width:100px;" onClick="sessionStorage.removeItem(diff)">OK</button></a>
+            </div>
+            <br>
+
+        </div>
+
+        <div style="position:absolute;left: 560px;top: 250px;">
+
+            <div id="stat">
+                Score: <span id="score">0</span><br>
+            </div>
+
+
+        </div>
+
+		<h2 id="diff" align="center"></h2>
+        <script src="js/tetris.js"></script>
+    </body>
+</html>

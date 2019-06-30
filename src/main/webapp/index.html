@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.content {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 10px;
+}
+
+h1 {
+  font-family: impact;
+  font-size: 50px;
+}
+
+.dropbtn {
+  background-color: grey;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 25px;
+  width: 160px;
+  text-align: left;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  margin: 0 auto;
+  width: 160px;
+  border-radius: 25px; 
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: relative;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 25px; 
+  margin-bottom: 50px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 25px; 
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+form {
+  border: 3px solid #f1f1f1;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}
+
+input[type=text], input[type=password] {
+  width: 60%;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  margin: 8px 0;
+  cursor: pointer;
+  width: 20%;
+}
+
+.container {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin: none;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.buttonLogged {
+    margin: auto;
+    display:block;
+    width: 130px;
+}
+
+</style>
+</head>
+<body onload="InitPage()">
+<div class="content">
+  <h1 align="center">TetriPASS</h1>
+	<div class="dropdown">
+	  <button onclick="myFunction()" class="dropbtn">Start</button>
+	  <div id="myDropdown" class="dropdown-content">
+	    <a style="background-color:green; color:white; text-align: center" onClick="setDifficulty('Normaal')" href="tetris.html">Normaal</a>
+	    <a style="background-color:blue; color:white; text-align: center" onClick="setDifficulty('Moeilijk')" href="tetris.html">Moeilijk</a>
+	    <a style="background-color:red; color:white; text-align: center" onClick="setDifficulty('Extreem')" href="tetris.html">Extreem</a>
+	  </div>
+	</div>
+	<div id="NotLoggedInDiv">
+		  <div class="container">
+			  <form id="login_form">
+			  <h3 align="center">Login</h3>
+			  	<div id="error" style="color: red"></div>
+			    <input type="text" placeholder="Email adres" id="email" name="email" required>
+			
+			    <input type="password" placeholder="Wachtwoord" id="wachtwoord" name="wachtwoord" required>
+			    <br>
+			    <input type="button" id="login_button" value="verzend">
+			    <br>
+			    <label style="text-align:right">
+		    	   <a href="registreer.html">Nog geen account? Klik hier om te registreren!</a>
+			    </label>
+			  </form>
+		  </div>
+	</div>
+	<div id="LoggedInDiv">
+		<div class="wrapper">
+			 <h2 id="halloGebruiker" align="center"></h2>
+			 <button onClick="window.location.href = 'profiel.html'" class="buttonLogged" type="submit">Bekijk uw profiel</button>
+			 <br>
+			 <button id="logout_button" class="buttonLogged" type="submit">Uitloggen</button>
+		</div>
+	</div>
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>

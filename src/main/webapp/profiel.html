@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#leftbox { 
+    position: relative;
+    float:left;  
+    background:lightgrey; 
+    width:14%; 
+    height:550px; 
+    text-align: center;
+} 
+
+#middlebox{ 
+    position: relative;
+    float:left;  
+    background:lightgrey; 
+    width:14%; 
+    height:550px;
+    text-align: center;
+} 
+#rightbox{ 
+    position: relative;
+    float:right; 
+    background:lightgrey; 
+    width:14%; 
+    height:550px; 
+    text-align: center;
+}
+
+#white{
+    float:left;  
+    background:white; 
+    width:29%; 
+    height:550px;
+}
+
+.buttonHolder{
+    text-align: center;
+    background-color: white;
+    position: absolute;
+    padding-top: 10px;
+    width: 100%;
+    bottom: 0;
+}
+</style>
+</head>
+<body onload="InitPage()">
+	<h2 id="gebruikersnaam" align="center">gebruikersnaam</h2>
+	<h2 id="email" align="center">email adres</h2>
+	<br>
+	
+	<div id = "boxes"> 
+        <div id = "leftbox"> 
+            <h1>Normaal</h1>
+            <br> 
+            <h3 id="normaalRanking"></h3>
+            <br>
+            <h3 id="normaalAantal"></h3>
+            <div class="buttonHolder">
+			    <button id="normaalDelete">Verwijder score</button>
+			    <div id="error1" style="color: red"></div> 
+		    </div>
+        </div>
+        <div id = "white"></div>
+        <div id = "middlebox"> 
+            <h1>Moeilijk</h1>
+            <br> 
+            <h3 id="moeilijkRanking">ranknummer</h3>
+            <br>
+            <h3 id="moeilijkAantal">score aantal</h3> 
+            <div class="buttonHolder">
+			    <button id="moeilijkDelete">Verwijder score</button> 
+			    <div id="error2" style="color: red"></div>
+		    </div>
+        </div> 
+        <div id = "white"></div>
+        <div id = "rightbox"> 
+            <h1>Extreem</h1>
+            <br> 
+            <h3 id="extreemRanking">ranknummer</h3>
+            <br>
+            <h3 id="extreemAantal">score aantal</h3>
+            <div class="buttonHolder">
+			    <button id="extreemDelete">Verwijder score</button> 
+			    <div id="error3" style="color: red"></div>
+		    </div>
+        </div> 
+    </div>
+     <script src="js/profiel.js"></script>
+</body>
+</html>

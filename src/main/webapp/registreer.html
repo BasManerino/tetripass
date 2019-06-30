@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  margin: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+  width: 50%;
+  display: block;
+  margin: auto;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 5px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  padding: 16px 16px;
+  display: block;
+  margin: auto;
+  cursor: pointer;
+  text-align: center;
+  width: 20%;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<form id="save_form" method="POST">
+  <div class="container">
+    <h1 align="center">Registreer</h1>
+
+    <input type="text" placeholder="Email adres" name="email" id="email" required>
+    <br>
+    <br>
+    <input type="text" placeholder="Gebruikersnaam" name="gebruikersnaam" id="gebruikersnaam" required>
+	<br>
+	<br>
+    <input type="password" placeholder="Wachtwoord" name="psw" id="psw" required>
+    <input type="password" placeholder="Wachtwoord opnieuw" name="psw-repeat" id="psw-repeat" required>
+	<br>
+	<div id="error" align="center" style="color: red"></div>
+    <button type="button" onclick="addProfiel()" class="registerbtn" id="verzendProfiel">Verzend</button>
+  </div>
+  
+  <div class="container signin">
+    <a href="index.html">Heeft u al een account? Klik hier om in te loggen!</a>
+  </div>
+</form>
+<script src="js/registreer.js">
+</script>
+</body>
+</html>
