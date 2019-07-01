@@ -1,3 +1,4 @@
+// Verwijder een score uit de database
 function deleteScore(email, ranking) {
 	document.querySelector("#error" + ranking).innerHTML = "";
 	let fetchoptions = {

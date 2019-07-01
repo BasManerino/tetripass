@@ -63,8 +63,8 @@
             #stat {
                 font-family: arial;
                 font-weight: bold;
-                font-size: 35px;
-                margin-left: 400px;
+                font-size: 22px;
+                text-align: center;
             }
 
             #home {
@@ -83,7 +83,13 @@
     	<h1 align="center">TetrIPASS</h1>
     
         <canvas id="canvas"></canvas>
+        
+        <div id="stat">
+            Score: <span id="score">0</span>
+        </div>
 
+		<h2 id="diff" align="center"></h2>
+		
         <div id="highscore" style="width:40%;">
         
        		
@@ -107,16 +113,6 @@
 
         </div>
 
-        <div style="position:absolute;left: 560px;top: 250px;">
-
-            <div id="stat">
-                Score: <span id="score">0</span><br>
-            </div>
-
-
-        </div>
-
-		<h2 id="diff" align="center"></h2>
         <script src="js/tetris.js"></script>
     </body>
 </html>

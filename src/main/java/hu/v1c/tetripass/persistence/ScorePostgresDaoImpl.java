@@ -12,13 +12,15 @@ import hu.v1c.tetripass.persistence.RankingsPostgresDaoImpl;
 
 public class ScorePostgresDaoImpl extends PostgresBaseDao implements ScoreDao {
 	
-	public ProfielPostgresDaoImpl profielDAO = new ProfielPostgresDaoImpl();
-	public RankingsPostgresDaoImpl rankingDAO = new RankingsPostgresDaoImpl();
+	public ProfielDao profielDAO = new ProfielPostgresDaoImpl();
+	public RankingsDao rankingDAO = new RankingsPostgresDaoImpl();
 	
+	// Vind alle scores in de database
 	public List<Score> findAll() {
 		return this.getScores("select * from score order by scoreid limit 20");
 	}
 	
+	// Vind alle scores in de database (werkt hetzelfde als findAll, maar met eventuele extra voorwaarden in de query)
 	private List<Score> getScores(String query) {
 		List<Score> results = new ArrayList<Score>();
 		
@@ -41,6 +43,7 @@ public class ScorePostgresDaoImpl extends PostgresBaseDao implements ScoreDao {
 		return results;
 	}
 	
+	// Voeg een score toe aan de database
 	public boolean add(Score score) {
 		System.out.println("-x-x-x-x-x-");
 		
@@ -56,6 +59,7 @@ public class ScorePostgresDaoImpl extends PostgresBaseDao implements ScoreDao {
 		}
 	}
 	
+	// Update een score in de database (update alleen aantal)
 	public boolean update(Score score) {
 		try (Connection con = super.getConnection()) {
 			
@@ -70,6 +74,7 @@ public class ScorePostgresDaoImpl extends PostgresBaseDao implements ScoreDao {
 		return true;
 	}
 	
+	// Verwijder een score uit de database
 	public boolean delete(Score score) {
 		try (Connection con = super.getConnection()) {
 			PreparedStatement pstmt = con.prepareStatement("delete from score where scoreid = '" + score.getScoreID() + "'");

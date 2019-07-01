@@ -33,9 +33,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 				Claims claims = parser.parseClaimsJws(token).getBody();
 				
 				String user = claims.getSubject();
-				System.out.println(user);
 				String role = claims.get("rol").toString();
-				System.out.println(role);
 				msc = new MySecurityContext(user, role, isSecure);
 			} catch (JwtException | IllegalArgumentException e) {
 				System.out.println("Invalid JWT, processing as quest!");

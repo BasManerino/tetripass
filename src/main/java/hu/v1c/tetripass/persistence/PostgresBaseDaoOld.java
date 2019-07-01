@@ -1,11 +1,10 @@
+// Deze BaseDao word gebruikt op TomCat
+
 package hu.v1c.tetripass.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
 public class PostgresBaseDaoOld {
 	public Connection getConnection() {

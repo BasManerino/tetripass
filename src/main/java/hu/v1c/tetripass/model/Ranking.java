@@ -1,7 +1,5 @@
 package hu.v1c.tetripass.model;
 
-import java.util.*;
-
 public class Ranking {
 
 	private int ID;

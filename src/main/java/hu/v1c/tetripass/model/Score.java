@@ -1,8 +1,5 @@
 package hu.v1c.tetripass.model;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Score {
 
 	Profiel profiel;

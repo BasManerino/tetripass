@@ -1,3 +1,5 @@
+// Deze BaseDao word gebruikt op Heroku
+
 package hu.v1c.tetripass.persistence;
 
 import java.sql.Connection;

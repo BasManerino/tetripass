@@ -1,26 +1,14 @@
 package hu.v1c.tetripass.webservices;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import hu.v1c.tetripass.model.Profiel;
@@ -38,6 +26,9 @@ public class ServiceProvider {
 	public static ScorePostgresDaoImpl getScoreService() {
 		return scoreService;
 	}
+	
+	// Hier worden alle functies verbindbaar gemaakt met Javascript.
+	// @PermitAll maakt dat de functie door alle rollen gedaan word, @RolesAllowed laat alleen bepaalde rollen toe.
 	
 	@PermitAll
 	@GET

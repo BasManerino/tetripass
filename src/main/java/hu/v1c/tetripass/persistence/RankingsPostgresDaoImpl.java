@@ -8,10 +8,12 @@ import hu.v1c.tetripass.model.Ranking;
 
 public class RankingsPostgresDaoImpl extends PostgresBaseDao implements RankingsDao {
 	
+	// Vind alle rankings in de database
 	public List<Ranking> findAll() {
 		return this.getRanking("select * from ranking order by code limit 20");
 	}
 	
+	// Vind alle rankings in de database (werkt hetzelfde als findAll, maar met eventuele extra voorwaarden in de query)
 	private List<Ranking> getRanking(String query) {
 		List<Ranking> results = new ArrayList<Ranking>();
 		
@@ -31,6 +33,7 @@ public class RankingsPostgresDaoImpl extends PostgresBaseDao implements Rankings
 		return results;
 	}
 	
+	// Vind een ranking in de database met de ID
 	public Ranking findRankingByID(int rankingSearch) {
 		Ranking result = null;
 		System.out.println("xx");

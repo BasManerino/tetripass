@@ -1,3 +1,4 @@
+// Voeg een profiel toe in de database
 function addProfiel() {	
     var formData = new FormData(document.querySelector("#save_form"));
 	var encData = new URLSearchParams(formData.entries());

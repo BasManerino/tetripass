@@ -7,6 +7,8 @@ import java.util.List;
 import hu.v1c.tetripass.model.Profiel;
 
 public class ProfielPostgresDaoImpl extends PostgresBaseDao implements ProfielDao {
+	
+	// Voeg een profiel toe aan de database
 	public boolean add(Profiel profiel) {
 		System.out.println("-x-x-x-x-x-");
 		
@@ -22,10 +24,12 @@ public class ProfielPostgresDaoImpl extends PostgresBaseDao implements ProfielDa
 		}
 	}
 	
+	// Vind alle profiels in de database
 	public List<Profiel> findAll() {
 		return this.getProfiels("select * from profiel order by code limit 20");
 	}
 	
+	// Vind alle profiels in de database (werkt hetzelfde als findAll, maar met eventuele extra voorwaarden in de query)
 	private List<Profiel> getProfiels(String query) {
 		List<Profiel> results = new ArrayList<Profiel>();
 		
@@ -48,6 +52,7 @@ public class ProfielPostgresDaoImpl extends PostgresBaseDao implements ProfielDa
 		return results;
 	}
 	
+	// Vind een profiel met de email
 	public Profiel findByEmail(String emailSearch) {
 		Profiel result = null;
 		System.out.println("xx");
@@ -69,6 +74,7 @@ public class ProfielPostgresDaoImpl extends PostgresBaseDao implements ProfielDa
 		return result;
 	}
 	
+	// Check of het email adres en wachtwoord bij het inloggen kloppen
 	public String checkCreditionals(String email, String pass) {
 		String result = null;
 		try (Connection con = super.getConnection()) {

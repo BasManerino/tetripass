@@ -13,26 +13,16 @@
     var navigator = window['navigator'];
 
     var canvas = document.getElementById('canvas');
-    var preview = document.getElementById('preview');
 
     var favicon = document.getElementById('favicon');
     var fav = document.getElementById('fav');
-
-    var divBest = document.getElementById('best');
-    var divEdit = document.getElementById('edit');
-    //var divOpen = document.getElementById('open');
-    //var divOpenScore = document.getElementById('open2');
 
     var divScore = document.getElementById('score');
 
     var divTables = document.getElementById('tables');
 
     var highscore = document.getElementById('highscore');
-    
-    var sFB = document.getElementById('sFB');
-    var sTW = document.getElementById('sTW');
-    var sGP = document.getElementById('sGP');
-
+   
     var ctx = canvas.getContext('2d');
 
 
@@ -43,9 +33,8 @@
      */
     var speed = 0;
     
+    // Stel de snelheid van de blokken in afhankelijk van de moeilijkheidsgraad
     var diff = sessionStorage.getItem("diff");
-    
-    console.log(speed);
     
     if(diff == "Normaal"){
     	speed = 600;
@@ -63,22 +52,12 @@
     	speed = 600;
     }
 
-    console.log(speed);
-
     /**
      * Score for current speed
      * 
      * @type number
      */
     var speedScore = 0;
-
-    /**
-     * Somehow cheated? Entering the highscore isn't possible anymore
-     * 
-     * @type {boolean}
-     */
-    var expelled = false;
-
 
     /**
      * Game score
@@ -180,20 +159,6 @@
      * @type boolean
      */
     var showShadow = true;
-
-    /**
-     * Is the favicon animated?
-     * 
-     * @type boolean
-     */
-
-
-    /**
-     * Is the preview box visible?
-     * 
-     * @type boolean
-     */
-    var showPreview = true;
 
     /**
      * The actual game board to work on (a Y/X matrix)
@@ -550,11 +515,7 @@
 
         gameStatus = STATUS_GAMEOVER;
 
-        if (expelled) {
-
-        } else {
-            highscore.style.display = 'block';
-        }
+        highscore.style.display = 'block';
     };
 
 
@@ -974,50 +935,10 @@
 
         }, 1000);
     };
-    
 
-    /**
-     * Update the social links
-     */
-    var updateSocialLinks = function() {
-
-        var fb = 'https://www.facebook.com/sharer/sharer.php?u=';
-        var tw = 'http://twitter.com/share?text=Check%20out%20my%20custom%20HTML5%20Tetris%20(made%20by%20%40RobertEisele)&amp;url=';
-        var gp = 'https://plus.google.com/share?url=';
-
-        var P = [];
-        
-        for (var i = pieces.length; i--; ) {
-
-            P[i] = pieces[i].slice(0, 1 + PIECE_SHAPE); // Upper slice() bound is exclusive, so 1+x
-            P[i][PIECE_PROBABILITY] = 1; // We kill the probability for sake of string length. Maybe we'll find a better solution
-           
-            P[i][PIECE_COLOR] = P[i][PIECE_COLOR][0].substring(4, P[i][PIECE_COLOR][0].length - 1).split(',');
-        }
-
-        try {
-
-            // See prepareUrlHash() as the opposite endpoint
-            location.hash = window['btoa'](JSON.stringify({
-                'P': P,
-                'X': tilesX,
-                'Y': tilesY,
-                'S': tileSize,
-                'B': tileBorder,
-                'Q': speed
-            }));
-            
-        } catch (e) {
-            return;
-        }
-
-        var url = encodeURIComponent(location.href);
-        sFB.setAttribute('href', fb + url);
-        sTW.setAttribute('href', tw + url);
-        sGP.setAttribute('href', gp + url);
-    };
-
+    // Functie om de score toe te voegen
     function addScore(score) {	
+    	// Achterhaal de huidige moeilijkheidsgraad uit de session storage
         switch (sessionStorage.getItem("diff")) {
         case "Normaal":
             rank = 1;
@@ -1030,6 +951,7 @@
             break;
         }
         
+        // Stel de fetchoptions in voor de score ophalen en fetch de score
     	let fetchoptions = {
     			method: 'GET',
     			headers: {
@@ -1040,6 +962,7 @@
         fetch('restservices/stuff/getScore/' + sessionStorage.getItem("email") + "/" + rank, fetchoptions)
 		.then((response) => {
 			if(response.status == 500){
+				// Als er nog geen score bestaat van deze speler en in deze ranking, maak de score aan
 				let fetchoptions2 = {
 		    			method: 'POST',
 		    			headers: {
@@ -1117,6 +1040,7 @@
         	
             document.getElementById('eindScore').innerHTML = 'Score: ' + score;
 
+            // Check of er is ingelogd
             if(sessionStorage.getItem('isLoggedIn') == "true"){
             	let fetchoptions = {
             			headers: {
@@ -1137,6 +1061,7 @@
                     break;
                 }
             	
+                // Laat het goede eindscherm zien afhankelijk van of de speler is ingelogd en of er al een score is opgeslagen
                 fetch('restservices/stuff/getScore/' + sessionStorage.getItem("email") + "/" + rank, fetchoptions)
     			.then((response) => {
     				if(response.status == 500){
@@ -1151,6 +1076,7 @@
     				else {
     					document.getElementById('scoreAdd').style.display = "none";
 
+    					// Als de behaalde score hoger is dan de huidige score van de speler, update het
 						fetch('restservices/stuff/getScore/' + sessionStorage.getItem("email") + "/" + rank, fetchoptions)
 						.then((response) => { 
     						if (response.ok) {
@@ -1245,15 +1171,6 @@
         }
     };
 
-
-    /**
-     * Set the actual rendered favicon
-     */
-    var setFavicon = function() {
-        fav['href'] = favicon['toDataURL']('image/png');
-    };
-
-
     /**
      * A simple animation loop
      * 
@@ -1302,58 +1219,6 @@
             return obj.attachEvent("on" + type, fn);
         }
     };
-
-    
-    /**
-     * Set the game mode to expelled, means highscore participation is disabled (because of custom game)
-     * 
-     * @param {boolean=} diag Prevent the dialogue
-     */
-    var setExpelled = function(diag) {
-
-        if (!expelled && !diag) {
-            alert("This disables highscore participation.");
-        }
-        expelled = true;
-        displayHomeLink();
-    };
-    
-    /*
-     * Display the home link when needed
-     */
-    var displayHomeLink = function() {
-        document.getElementById('home').style.display = 'block';
-    };
-
-
-    // Set the click handler for menu opening
-    var evTabOpen = function(ev) {
-
-        var elm = ev.target.parentNode;
-
-        if (elm === divEdit) {
-            divEdit.style.zIndex = 4;
-            divBest.style.zIndex = 2;
-        } else {
-            divEdit.style.zIndex = 2;
-            divBest.style.zIndex = 4;
-        }
-
-        animate(600, function(k) {
-            /*
-             var pos = k === 1 ? 1 : 1 - Math.pow(2, -10 * k);
-             
-             pos = editClosed + pos * (1 - 2 * editClosed);
-             
-             edit.style.right = (-pos * 420 | 0) + 'px';
-             */
-            elm.style.right = (420 * ((k === 1 ? 1 : 1 - Math.pow(2, -10 * k)) * (1 - 2 * menuOpen) + menuOpen - 1) | 0) + 'px';
-        }, function() {
-            menuOpen = !menuOpen;
-        });
-    };
-    //addEvent(divOpen, 'click', evTabOpen);
-   // addEvent(divOpenScore, 'click', evTabOpen);
 
     // Set keydown event listener
     addEvent(window, "keydown", function(ev) {
@@ -1457,17 +1322,9 @@
         }, function() { });
 
     }, 800);
-
-    // Overwrite a custom setting with the defaults
-    prepareUrlHash(location['hash']);
     
     // Prepare the pieces and pre-calculate some caches
     preparePieces(pieces);
-    
-    if (location['hash']) {
-        // If a URL was given, update social links
-        updateSocialLinks();
-    }
     
     // Prepare the board
     prepareBoard();
@@ -1475,6 +1332,7 @@
     // Initialize the game
     init();
     
+    // Laat de huidige moeilijkheidsgraad op het scherm zien
     document.getElementById('diff').innerHTML = diff;
     
 })(this);
