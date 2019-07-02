@@ -1,4 +1,4 @@
-# tetripass
+# TetrIPASS
 
 Dit is de GitHub repository voor het IPASS project van Sebastiaan Jansen, klas V1C.
 Hierbij een paar mededelingen:
